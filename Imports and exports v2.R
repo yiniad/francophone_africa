@@ -5,7 +5,10 @@ library(ggplot2)
 library(openxlsx)
 library(dplyr)
 
+# Enter country
 co <- "Mali"
+
+# Import data for selected country
 exports <- read_excel(paste("data/",co,"_Exports_and_Imports_by_Areas_and_Co.xlsx",sep=""),sheet="Exports, FOB",skip=6)
 imports <- read_excel(paste("data/",co,"_Exports_and_Imports_by_Areas_and_Co.xlsx",sep=""),sheet="Imports, CIF",skip=6)
 
