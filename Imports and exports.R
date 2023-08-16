@@ -7,7 +7,7 @@ library(openxlsx)
 # Enter Country
 co <- "Mali"
 
-# Import data
+# Imports data for entered country
 exports <- read_excel(paste("data/",co,"_Exports_and_Imports_by_Areas_and_Co.xlsx",sep=""),sheet="Exports, FOB",skip=6)
 imports <- read_excel(paste("data/",co,"_Exports_and_Imports_by_Areas_and_Co.xlsx",sep=""),sheet="Imports, CIF",skip=6)
 
@@ -15,6 +15,7 @@ imports <- read_excel(paste("data/",co,"_Exports_and_Imports_by_Areas_and_Co.xls
 # Prepare data
 exports <- exports[-1,]
 imports <- imports[-1,]
+
 #create sub categories for countries
 euro_area <- exports$Country[(which(exports$Country == "Euro Area")+1):(which(exports$Country =="Australia")-1)]
 emerging_and_developing_asia <- exports$Country[(which(exports$Country == "Emerging and Developing Asia")+1):(which(exports$Country =="Emerging and Developing Europe")-1)]
@@ -44,7 +45,6 @@ imports$category <- ifelse(imports$Country %in% advanced_economies, "Advanced Ec
                            ifelse(imports$Country %in% emerging_and_developing_economies, "Emerging and Developing Economies", 
                                   ifelse( imports$Country %in% countries_not_specified, "Countries & Areas not specified",
                                     ifelse(imports$Country %in% other_countries, "Other Countries not included elsewhere","N/A"))))
-
 imports$subcategory <- ifelse(imports$Country %in% euro_area, "Euro Area",
                               ifelse(imports$Country %in% emerging_and_developing_asia, "Emerging and Developing Asia",
                                      ifelse(imports$Country %in% emerging_and_developing_europe, "Emerging and Developing Europe",
@@ -53,11 +53,9 @@ imports$subcategory <- ifelse(imports$Country %in% euro_area, "Euro Area",
                                                           ifelse(imports$Country %in% western_emisphere, "Western Hemisphere",
                                                                  "N/A"))))))
 
-
 # create dataset for breakdown by country only
 exports_by_country <- exports[exports$category != "N/A" , ]
 imports_by_country <- imports[imports$category != "N/A" , ]
-
 
 # reshape the dataset to long format 
 exports_long <- exports_by_country %>%
@@ -116,8 +114,6 @@ ggplot(total_combined, aes(x = Year)) +
        title = paste(co,": Evolution of Total Exports and Imports by Year in USD mn")) +
   scale_color_manual(values = c("Exports" = "blue", "Imports" = "red")) +
   theme_minimal()
-
-
 
 #Exports and imports by subcategory
 total_exports_by_subcategory <- exports_long %>%
