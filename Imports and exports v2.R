@@ -232,6 +232,52 @@ for (c in top_countries_exports) {
   print(p)  
 }
 
+#Check imports and exports to Sahel region as a whole, uncomment when country is France
+# sahel_countries <- c("Burkina Faso", "Cameroon", "Chad", "Gambia, The", "Guinea",  "Mauritania, Islamic Rep. of", "Mali", "Niger", "Nigeria" ,"Senegal")
+# exports_to_sahel <- exports_percentage %>%
+#   filter(Country %in% sahel_countries)%>%
+#   group_by(Year) %>%
+#   summarise(Value = sum(Export_Percentage))
+# imports_to_sahel <- imports_percentage %>%
+#   filter(Country %in% sahel_countries)%>%
+#   group_by(Year) %>%
+#   summarise(Value = sum(Import_Percentage))
+# 
+# ggplot(exports_to_sahel, aes(x = Year, y = Value)) +
+#   geom_line(color = "blue") +
+#   labs(x = "Year", y = "Percentage out of Total Exports (%)",
+#        title = "France: Evolution of Percentage of Exports to Sahel Countries") +
+#   theme_minimal()
+# 
+# ggplot(imports_to_sahel, aes(x = Year, y = Value)) +
+#   geom_line(color = "red") +
+#   labs(x = "Year", y = "Percentage out of Total Exports (%)",
+#        title = "France: Evolution of Percentage of Imports to Sahel Countries") +
+#   theme_minimal()
+#   
+# 
+# exports_to_sahel_total <- exports_long %>%
+#   filter(Country %in% sahel_countries)%>%
+#   group_by(Year) %>%
+#   summarise(Value = sum(Export_Value))
+# imports_to_sahel_total <- imports_long %>%
+#   filter(Country %in% sahel_countries)%>%
+#   group_by(Year) %>%
+#   summarise(Value = sum(Import_Value))
+# 
+# ggplot(exports_to_sahel_total, aes(x = Year, y = Value)) +
+#   geom_line(color = "blue") +
+#   labs(x = "Year", y = "Total Exports (USD mn)",
+#        title = "France: Evolution of Exports to Sahel Countries") +
+#   theme_minimal()
+# 
+# ggplot(imports_to_sahel_total, aes(x = Year, y = Value)) +
+#   geom_line(color = "red") +
+#   labs(x = "Year", y = "Total Imports (USD mn)",
+#        title = "France: Evolution of Imports to Sahel Countries") +
+#   theme_minimal()
+
+
 #loop through list of countries to be checked and create charts
 # check_countries <- c("Brazil", "India", "Bermuda")
 # for (c in check_countries){
