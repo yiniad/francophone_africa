@@ -5,7 +5,7 @@ library(ggplot2)
 library(openxlsx)
 library(dplyr)
 
-countries <- c("Mali","Niger","Senegal","Morocco","Algeria")
+countries <- c("Mali","Niger","Senegal","Morocco","Algeria","Gabon")
 all_exports_percentage <- data.frame()
 all_imports_percentage <- data.frame()
 
@@ -103,14 +103,26 @@ for (co in countries){
   all_imports_percentage <- bind_rows(all_imports_percentage, imports_percentage)
 }
 
-imports_from_france <- all_imports_percentage %>%
-  filter(Country == "France")
+#check if there's an interesting trend in imports percentages for these countries
+import_countries <- c("China, P.R.: Mainland", "France", "Morocco","India","United States")
 
-# Create a line chart
-ggplot(imports_from_france, aes(x = Year, y = Import_Percentage, group = country_of_origin, color = country_of_origin)) +
-  geom_line() +
-  labs(title = "Percentage of Imports from France by Country of Origin",
-       x = "Year",
-       y = "Import Percentage") +
-  theme_minimal()+
-  scale_color_discrete(name = "Country")
+for (c in import_countries ) {
+  imports_from_c <- all_imports_percentage %>%
+    filter(Country == c)
+  p <-ggplot(imports_from_c, aes(x = Year, y = Import_Percentage, group = country_of_origin, color = country_of_origin)) +
+    geom_line() +
+    labs(title = paste("Imports from",c, "as a Percentage of Total,  by Country"),
+         x = "Year",
+         y = "Import Percentage") +
+    theme_minimal()+
+    scale_color_discrete(name = "Country")
+  print(p)
+}
+
+# Export percentages data to spreadsheet
+wb <- createWorkbook()
+addWorksheet(wb, "Exports percentage")
+writeData(wb, sheet = 1, x = all_exports_percentage)
+addWorksheet(wb, "Imports percentage")
+writeData(wb, sheet = 2, x = all_imports_percentage)
+saveWorkbook(wb, "Exports and Imports percentages.xlsx", overwrite = TRUE)
