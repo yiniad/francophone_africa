@@ -28,7 +28,7 @@ western_emisphere <- exports$Country[(which(exports$Country == "Western Hemisphe
 advanced_economies <- c(euro_area, "Australia", "Canada","China, P.R.: Hong Kong","China, P.R.: Macao","Czech Rep.","Denmark","Iceland","Israel","Japan","Korea, Rep. of","New Zealand","Norway","San Marino, Rep. of","Singapore","Sweden","Switzerland","Taiwan Province of China","United Kingdom","United States","Holy See")
 emerging_and_developing_economies <- c(emerging_and_developing_asia,emerging_and_developing_europe,middle_east_and_central_asia, subsaharan_africa, western_emisphere)
 other_countries <- c("Cuba",	"Korea, Dem. People's Rep. of")
-countries_not_specified <- "Countries & Areas not specified"
+countries_not_specified <- c("Countries & Areas not specified")
 #add category and subcategory columns to imports and exports datasets 
 exports$category <- ifelse(exports$Country %in% advanced_economies, "Advanced Economy",
                            ifelse(exports$Country %in% emerging_and_developing_economies, "Emerging and Developing Economies", 
