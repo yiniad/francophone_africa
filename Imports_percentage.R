@@ -10,9 +10,8 @@ all_exports_percentage <- data.frame()
 all_imports_percentage <- data.frame()
 
 for (co in countries){
-  exports <- read_excel(paste("/Users/adniaya/Downloads/",co,"_Exports_and_Imports_by_Areas_and_Co.xlsx",sep=""),sheet="Exports, FOB",skip=6)
-  imports <- read_excel(paste("/Users/adniaya/Downloads/",co,"_Exports_and_Imports_by_Areas_and_Co.xlsx",sep=""),sheet="Imports, CIF",skip=6)
-  
+  exports <- read_excel(paste("data/",co,"_Exports_and_Imports_by_Areas_and_Co.xlsx",sep=""),sheet="Exports, FOB",skip=6)
+  imports <- read_excel(paste("data/",co,"_Exports_and_Imports_by_Areas_and_Co.xlsx",sep=""),sheet="Imports, CIF",skip=6)
   
   exports <- exports[-1,]
   imports <- imports[-1,]
